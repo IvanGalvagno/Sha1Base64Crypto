@@ -26,18 +26,12 @@ namespace SH1Base64Crypto
 
         private void btn_crypto_Click(object sender, EventArgs e)
         {
+            string src = tbx_input.Text.Trim();
             if (tbx_input.Text.Trim() != "")  
             {
                 using (SHA1 sha1 = SHA1.Create())
                 {
-
-                    byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(tbx_input.Text.Trim()));
-                    var sb = new StringBuilder();
-                    for (int i = 0; i < hash.Length; i++)
-                    {
-                        sb.Append(hash[i].ToString("X2"));
-                    }
-                    tbx_output.Text = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(sb.ToString().Trim()));
+                    tbx_output.Text = Convert.ToBase64String(sha1.ComputeHash(Encoding.UTF8.GetBytes(src)));
                 }
             }
         }
